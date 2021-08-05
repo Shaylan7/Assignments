@@ -3,16 +3,24 @@
   <head>
     <title>Shay's Game</title>
     <link rel="stylesheet" type="text/css" href="style.css">
+    <!-- <script src="game.js"></script> -->
   </head>
   <body>
-      <h1> Guess the Number!</h1>
-      <section>Pick a number between 1 and 100 </section>
-      <section class="form">
-        <label for="guessField">Enter a guess: </label>
-        <input class="nameform" type = "number" id = "guessField" class = "guessField">
-        <input type = "submit" value = "Submit" 
+      <section class="container"> 
+        <h1> Guess the Number!</h1>
+        <h4>Pick a number between 1 and 100 </h4> 
+        <section class="form">
+        
+          <label for="guessField">Enter a guess: </label>
+          <input class="input100" type="text" id = "guessField" class = "guessField">
+          <input type = "submit" value = "Submit" 
                class = "guessSubmit" id = "submitguess">
+          <p class="left guesses"></p> 
+          <p class ="right guesscount"></p>
+          <p class="lastResult"></p> 
+          <p class="bottom-center lowOrHi"></p>
+        </section>
       </section>
   </body>
-  <script src="./game.js"></script>
+  <script src="game.js"></script>
 </html>
