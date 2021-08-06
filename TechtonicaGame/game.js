@@ -2,7 +2,7 @@
 // import ReactDOM from 'https://cdn.skypack.dev/react-dom@^17';
 
 
-let chosenNumber = ((Math.random()*100) +1);
+let chosenNumber = Math.floor(((Math.random()*100) +1));
 const guesses = document.querySelector('.guesses');
 const lastResult = document.querySelector('.lastResult');
 const lowOrHi = document.querySelector('.lowOrHi');
@@ -10,30 +10,35 @@ const lowOrHi = document.querySelector('.lowOrHi');
 const guessSubmit = document.querySelector('.guessSubmit');
 const guessField = document.querySelector('.guessField');
 const guesscount = document.querySelector('.guesscount');
+const formBackground = document.querySelector('.container');
 
-let guessCount = 1;
+let guessCount = 0;
 
 // document.getElementById("submitguess").onclick = function(){
 function checkGuess() {
     let guess = document.getElementById("guessField").value;
 
-    if (guessCount === 1) {
+    if (guessCount === 0) {
         guesses.textContent = 'Previous guesses: ';
       }
       guesses.textContent += guess + ' ';
       
-    if (chosenNumber === guess){
+    if (chosenNumber == guess){
         lastResult.textContent = 'Congratulations! You got it right!';
+        formBackground.style.backgroundColor = 'green';
+        lowOrHi.textContent = '';
+        setGameOver();
     } 
     if (guessCount === 10) {
-        lastResult.textContent = "Game Over"
-        } else if (chosenNumber > guess && (chosenNumber - guess >= 10)){
+        lastResult.textContent = "Game Over";
+        setGameOver();
+        } else if (chosenNumber > guess && (chosenNumber - guess > 10)){
         lowOrHi.textContent ="Way higher";
-        } else if (chosenNumber > guess && (chosenNumber - guess <= 10)){
+        } else if (chosenNumber > guess && (chosenNumber - guess < 10)){
         lowOrHi.textContent = "You're close, a little higher";
-        } else if (chosenNumber < guess && (guess - chosenNumber >= 10)){
+        } else if (chosenNumber < guess && (guess - chosenNumber > 10)){
         lowOrHi.textContent ="Way lower"; 
-        } else if (chosenNumber < guess && (guess - chosenNumber <= 10)){
+        } else if (chosenNumber < guess && (guess - chosenNumber < 10)){
         lowOrHi.textContent ="You're close, a little lower";
     } 
     guessCount++;
@@ -43,3 +48,33 @@ function checkGuess() {
 }
 
 guessSubmit.addEventListener('click', checkGuess);
+
+
+function setGameOver() {
+    guessField.disabled = true;
+    guessSubmit.disabled = true;
+    resetButton = document.createElement('button');
+    resetButton.textContent = 'Start new game';
+    document.body.append(resetButton);
+    resetButton.addEventListener('click', resetGame);
+  }
+
+  function resetGame() {
+    guessCount = 1;
+  
+    const resetParas = document.querySelectorAll('.resultParas p');
+    for (let i = 0 ; i < resetParas.length ; i++) {
+      resetParas[i].textContent = '';
+    }
+  
+    resetButton.parentNode.removeChild(resetButton);
+  
+    guessField.disabled = false;
+    guessSubmit.disabled = false;
+    guessField.value = '';
+    guessField.focus();
+  
+    lastResult.style.backgroundColor = 'white';
+  
+    randomNumber = Math.floor(Math.random() * 100) + 1;
+  }
