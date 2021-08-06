@@ -3,11 +3,24 @@
   <head>
     <title>Shay's Game</title>
     <link rel="stylesheet" type="text/css" href="style.css">
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+    </style>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Metrophobic&family=Permanent+Marker&display=swap');
+    </style>
     <!-- <script src="game.js"></script> -->
   </head>
   <body>
+    <canvas id="world"></canvas>
+    <button class="btn questionmark">?</button>
+    <section class="instructions"> How to play: You will chose a number between 1 and 100. You only have 10 tries to 
+      get the right answer. If you reach the 10th try without success it's gameover!! 
+      After each guess you will receive a hint. If you are more than 10 away from the random number your hint will
+      include "Way"  
+    </section>
       <section class="container"> 
-        <h1> Guess the Number!</h1>
+        <h1 class="header"> Guess the Number!</h1>
         <h4>Pick a number between 1 and 100 </h4> 
         <section class="form">
         
@@ -15,12 +28,14 @@
           <input class="input100" type="text" id = "guessField" class = "guessField">
           <input type = "submit" value = "Submit" 
                class = "guessSubmit" id = "submitguess">
-          
+          <div class="resultParas">
           <p class="left guesses"></p> 
           <p class ="right guesscount"></p>
           <p class="lastResult"></p> 
           <p class="bottom-center lowOrHi"></p>
-          
+          </div>
+          <input type = "submit" value = "Restart" 
+               class = "guessRestart" id = "restartguess">
         </section>
       </section>
   </body>

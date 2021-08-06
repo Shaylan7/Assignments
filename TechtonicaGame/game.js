@@ -8,9 +8,13 @@ const lastResult = document.querySelector('.lastResult');
 const lowOrHi = document.querySelector('.lowOrHi');
 
 const guessSubmit = document.querySelector('.guessSubmit');
+const guessRestart = document.querySelector('.guessRestart')
 const guessField = document.querySelector('.guessField');
 const guesscount = document.querySelector('.guesscount');
 const formBackground = document.querySelector('.container');
+const questionMark = document.querySelector('.questionmark');
+const readingInstructions = document.querySelector('.instructions');
+
 
 let guessCount = 0;
 
@@ -18,10 +22,10 @@ let guessCount = 0;
 function checkGuess() {
     let guess = document.getElementById("guessField").value;
 
-    if (guessCount === 0) {
+    if (guessCount == 0) {
         guesses.textContent = 'Previous guesses: ';
       }
-      guesses.textContent += guess + ' ';
+      guesses.textContent += guess + ', ';
       
     if (chosenNumber == guess){
         lastResult.textContent = 'Congratulations! You got it right!';
@@ -31,6 +35,7 @@ function checkGuess() {
     } 
     if (guessCount === 10) {
         lastResult.textContent = "Game Over";
+        lowOrHi.textContent = '';
         setGameOver();
         } else if (chosenNumber > guess && (chosenNumber - guess > 10)){
         lowOrHi.textContent ="Way higher";
@@ -48,6 +53,8 @@ function checkGuess() {
 }
 
 guessSubmit.addEventListener('click', checkGuess);
+guessRestart.addEventListener('click', resetGame);
+questionMark.addEventListener('click', instructions); 
 
 
 function setGameOver() {
@@ -68,13 +75,21 @@ function setGameOver() {
     }
   
     resetButton.parentNode.removeChild(resetButton);
-  
+    
+    //re enables the guess fields / submit buttons 
     guessField.disabled = false;
     guessSubmit.disabled = false;
     guessField.value = '';
     guessField.focus();
   
-    lastResult.style.backgroundColor = 'white';
+    formBackground.style.backgroundColor = 'white';
   
     randomNumber = Math.floor(Math.random() * 100) + 1;
   }
+
+  function instructions(){
+    questionMark.style.display = 'none';
+    readingInstructions.style.display = 'inline';
+}
+
+
