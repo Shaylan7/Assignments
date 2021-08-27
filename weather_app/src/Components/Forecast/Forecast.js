@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import Conditions from '../Conditions/Conditions';
 import classes from './Forecast.module.css';
 
+
 const Forecast = () => {
     let [responseObj, setResponseObj] = useState({});
-    let [city, setCity] = useState('');
+    let [city, setCity] = useState('Seattle');
     const uriEncodedCity = encodeURIComponent(city);
     
 
@@ -14,13 +15,19 @@ const Forecast = () => {
     function getForecast(e) {
         e.preventDefault();
     
-
-      // weather data fetch function will go here
     
-      fetch(`https://api.openweathermap.org/data/2.5/forecast/daily?q=${uriEncodedCity}&cnt=5&appid=a24f6a95c88938366c0ee6c8e297d505
-      `)
+      // weather data fetch function will go here
+
+
+   
+      fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${uriEncodedCity}&units=imperial&appid=a24f6a95c88938366c0ee6c8e297d505`, {
+        mode : 'cors'
+      
+    })
+        // .then(response => console.log(response.Response)) 
         .then(response => response.json())
         .then(response => {
+                console.log(response)
            setResponseObj(response)
        })
     }           
@@ -30,8 +37,8 @@ const Forecast = () => {
         
    return (
     <div>
-    <h2>Find Current Weather Conditions</h2>
-    <div>
+    <div className={classes.Title}>
+    <h3>Find Current Weather Conditions</h3>
         <form onSubmit={getForecast}>
                 <input
                     type="text"
@@ -42,11 +49,15 @@ const Forecast = () => {
                     className={classes.textInput}/>
                 <button className={classes.Button}type="submit">Get Forecast</button>
             </form>
-        <Conditions
+            </div>
+            
+            <Conditions
                responseObj={responseObj}
                />
+            {/* <pre>{JSON.stringify(responseObj, null, 2)}</pre> */}
+        
     </div> 
-</div>
+
    )
 }
 export default Forecast;
