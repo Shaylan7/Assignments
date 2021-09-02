@@ -1,104 +1,45 @@
-import React, {useState} from "react";
-import totalQuestions from "./data.js";
-import "./questions.css"
+import React from "react";
+import "./questions.css";
+import { Carousel } from 'antd';
 
-export default function Questions(){
-    const [currentQuestion, setCurrentQuestion] = useState(0);
-    const[color, setButtonColor] = useState('grey'); 
-    const[count, setCount] = useState(0);
-    const [data,setData]=React.useState();
+function onChange(a, b, c) {
+    console.log(a, b, c);
+}
 
-   
-  
+const contentStyle = {
+    height: '160px',
+    color: '#fff',
+    lineHeight: '160px',
+    textAlign: 'center',
+    background: '#364d79',
+};
 
-    React.useEffect(() => {
-        fetch('/game')
-          .then((res) => res.json())
-          .then((data) => {
-              console.log(data)
-          setData(data)});
-    }, [])
+export default function Questions(props) {
+    //user is not interacting with questions therefore logice can be in the parent component. 
+    // we are passing all the data via props. We are not calling the API here. 
 
-    // let formattedData = JSON.stringify(data, null, 2)
+    let questions = props.questions
+    // question is now the whole data array
+    let currentIndex = props.index
+    //currentIndex is receiving the index data from the parent component and assigning it to currentIndex
+    let question = questions[currentIndex]
+    // question is extracting a singular question from the array at a specific index 
 
-    // {data.forEach((element, index) => {
-    //     console.log(element.title); 
-    //     console.log(index); 
-    //     })}
-  
-   // why is this second parameter needed ^^^ 
-
-    // const getData=()=>{
-    //     fetch('/game')
-    //       .then(function(response){
-    //         console.log(response)
-    //         return response.json();
-    //       })
-    //       .then(function(myJson) {
-    //         console.log(myJson);
-    //         setData(myJson)
-    //       });
-    //   }
-      
-      
-    // useEffect(()=>{
-    //     getData()
-    //   },[])
-
-//want// 
-    // const handleAnswerButtonClick = (choice) => {
-    //     
-    //     if (nextQuestion < totalQuestions.length){
-    //         setCurrentQuestion(nextQuestion)
-    //     } else {
-    //         alert('you reached the end of the quiz');
-    // }
-    // }
-
-    
-    // const colorArr = ['blue', 'pink', 'orange', 'brown', 'yellow', 'green']
-    // const handleAnswerButtonClick = (choice) => {
-    //     const nextQuestion = currentQuestion + 1;
-    //     const nextCount = count +1; 
-    //     var randomNum = Math.floor(Math.random()*6) 
-    //      if (nextQuestion < totalQuestions.length) {
-    //         setCurrentQuestion(nextQuestion);
-    //         setButtonColor(colorArr[randomNum]); 
-    //         console.log(color)
-    //         setCount(nextCount)
-    //     } else {
-    //          alert('you reached the end of the quiz');
-    //     }
-    
-
-    // }
-   
     return (
+
         <div>
-        <div className="content">
-        <div className='question-text'>{totalQuestions[currentQuestion].title}</div>
-        {console.log('random', data)}
-        <div>
-        <ul>
-            {data.map((value, index) => {
-            return <li key={index}>{value.title}</li>
-            })}
-        </ul>
+
+            {/* this is what the component needs for rendering  */}
+            {/* if the data is not null print out the question title  */}
+            <ul>
+                {questions != null ? <div style={contentStyle} className='question-text'>{question.title}</div>
+                    : null}
+            </ul>
+
         </div>
-        <div className='answer-section'>
-	    {/* {totalQuestions[currentQuestion].choices.map((choice, index) => (
-		<button style={{background:color}} onClick={() =>  handleAnswerButtonClick()}>{choice}</button>
-        ))} */}
-       </div>
-       </div>
-        <div>
-        
-       {/* {data && data.length>0 && data.map((item)=><p>{item.title}</p>)} */}
-        
-        {/* <pre>{JSON.stringify(data, null, 2)}</pre> */}
-        </div>
-        </div>
+
+
     )
 
-      
-    }
+
+}
