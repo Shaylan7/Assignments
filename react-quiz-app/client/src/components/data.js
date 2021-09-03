@@ -2,7 +2,7 @@ const totalQuestions = [{
     id: 1,
     title: "Independence Day was first established as a holiday by Congress in what year?",
     choices: ["1853", "1776", "1938", "1870"],
-    correct: "1870"
+    correct: "1870" 
 },
 {
     id: 2,
