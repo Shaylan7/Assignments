@@ -1,13 +1,21 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 export default function Users() {
+
+
+    const marlin = { name: "Marlin", email: "marlin@gmail.com", id:"1" };
+    const nemo = { name: "Nemo", email: "nemo@gmail.com", id: "2" };
+    const dory = { name: "Dory", email: "dory@gmail.com" , id: "3"};   
+
+    const [users, setUsers] = useState([marlin, nemo, dory])
+
 return (
     <section className="user-management">
     <h2>Users Management</h2>
 
     <ul id="users-list">
     {/* display all existing Users here */}
-    <li>...</li>
+    {users.map((element, i) => { return (<li key={element.id}>Name: {element.name} Email: {element.email}</li>)})}
     </ul>
 
     <div>
