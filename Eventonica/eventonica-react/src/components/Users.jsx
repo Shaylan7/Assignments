@@ -11,12 +11,19 @@ export default function Users() {
     const [name, setName] = useState('');
     const [id, setID] = useState('');
     const [email, setEmail] = useState(''); 
-    console.log(name,email,id)
+    
+
+    const clearForm =() => {
+        setName('');
+        setID('');
+        setEmail('')
+    }
 
     const onSubmit = e => {
         e.preventDefault();
         const newUser = {id: id, name: name, email: email};
         setUsers([...users, newUser]);
+        clearForm()
       };
 
 return (
