@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import DeleteUser from './DeleteUser';
 
 export default function Users() {
 
@@ -11,6 +12,8 @@ export default function Users() {
     const [name, setName] = useState('');
     const [id, setID] = useState('');
     const [email, setEmail] = useState(''); 
+    
+    console.log(id)
     
 
     const clearForm =() => {
@@ -25,6 +28,12 @@ export default function Users() {
         setUsers([...users, newUser]);
         clearForm()
       };
+
+      const deleteUser = (deleteId) => {
+        const newUsers = users.filter(i=>i.id !== deleteId)
+        setUsers(newUsers)
+      };
+    
 
 return (
     <section className="user-management">
@@ -52,18 +61,10 @@ return (
         <input type="submit" value="Add" />
         </fieldset>
     </form>
+    <DeleteUser deleteUser={deleteUser}/> 
     </div>
 
-    <div>
-    <h3>Delete User</h3>
-    <form id="delete-user" action="#">
-        <fieldset>
-        <label>User ID</label>
-        <input type="text" id="delete-user-id" />
-        </fieldset>
-        <input type="submit" />
-    </form>
-    </div>
+    
     </section>
 )
 }
