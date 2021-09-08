@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import Search from './Search.jsx'
+import Search from './Search.jsx';
+import DatePicker from './DatePicker.jsx'
 
 export default function Events() {
 
 
-    const tame = { eventName: "Tame Impala", date: '09-10-2021', category: 'music', size: 500, price: 80, id: "1" };
-    const bumbershoot = { eventName: "Bumbershoot", date: '09-17-2021', category: 'music', size: 800, price: 100, id: "2" };
-    const fair = { eventName: "Washington State Fair", date: '09-20-2021', category: 'entertainment', size: 400, price: 40, id: "3" };
+    const tame = { eventName: "Tame Impala", date: '09-10-2021', category: 'music', maxAttendees: 500, price: 80, id: "1", description: "words" };
+    const bumbershoot = { eventName: "Bumbershoot", date: '09-17-2021', category: 'music', maxAttendees: 800, price: 100, id: "2", description: "words" };
+    const fair = { eventName: "Washington State Fair", date: '09-20-2021', category: 'entertainment', maxAttendees: 400, price: 40, id: "3", description: "words" };
 
     const [events, setEvents] = useState([tame, bumbershoot, fair]);
     const [eventName, setEventName] = useState('');
@@ -15,6 +16,8 @@ export default function Events() {
     const [date, setDate] = useState('');
     const [category, setCategory] = useState('')
     const [deleteId, setdeleteId] = useState('');
+    const [description, setDescription] = useState('');
+    const [maxAttendees, setMaxAttendees] = useState('')
 
 
 
@@ -25,12 +28,17 @@ export default function Events() {
         setPrice('');
         setDate('');
         setCategory('')
+        setDescription('')
+        setMaxAttendees('')
     }
 
     // adds an event 
     const onSubmit = e => {
         e.preventDefault();
-        const newEvent = { id: id, eventName: eventName, price: price, date: date, category: category };
+        const newEvent = {
+            id: id, eventName: eventName, price: price,
+            date: date, category: category, description: description, maxAttendees: maxAttendees
+        };
         setEvents([...events, newEvent]);
         clearForm()
     };
@@ -58,7 +66,8 @@ export default function Events() {
                         {/* Display all Events here */}
                         {events.map((element, i) => {
                             return (<li key={element.id}>Name: {element.eventName}
-                                Price: ${element.price} Date: {element.date}</li>)
+                                Price: ${element.price} Date: {element.date}
+                                Description: {element.description} maxAttendees: {element.maxAttendees}</li>)
                         })}
                     </ul>
 
@@ -83,7 +92,9 @@ export default function Events() {
                                 id="add-event-date"
                                 placeholder="01-01-1999"
                                 value={date} onChange={(e) => setDate(e.target.value)} />
+                            <DatePicker handleDate={(newDate) => setDate(newDate)} />
 
+                            {/* when "date" button is selected. Calendar will pop out and the date selected will become the stored date */}
                             <label>ID</label>
                             <input type="text"
                                 id="add-event-date"
@@ -93,6 +104,16 @@ export default function Events() {
                             <input type="text"
                                 id="add-category-date"
                                 value={category} onChange={(e) => setCategory(e.target.value)} />
+
+                            <label>Description</label>
+                            <input type="text"
+                                id="add-event-description"
+                                value={description} onChange={(e) => setDescription(e.target.value)} />
+
+                            <label>Max Attendees</label>
+                            <input type="text"
+                                id="add-event-attendees"
+                                value={maxAttendees} onChange={(e) => setMaxAttendees(e.target.value)} />
 
 
                         </fieldset>
