@@ -3,15 +3,16 @@ import DeleteUser from './DeleteUser';
 
 export default function Users() {
 
-    const [apiResponse, setApiResponse] = useState("");
+    const [apiResponse, setApiResponse] = useState(null);
 
     console.log("apiResponse", apiResponse)
 
     const getUsers = () => {
         fetch("http://localhost:3000/users")
-            .then(res => res.text())
+            .then(res => res.json())
             .then(res => setApiResponse(res))
     };
+
 
     useEffect(() => {
         getUsers(); // useEffect will run getUsers() every time this component loads, as opposed to just the first time it is rendered.
@@ -54,9 +55,11 @@ export default function Users() {
             <h2>Users Management</h2>
 
             <ul id="users-list">
-            {apiResponse}
+            {apiResponse != null ? apiResponse.map((element, i) => { return (<li key={element.id}>Name: {element.name} Email: {element.email}</li>)}):null}
                 {/* display all existing Users here */}
-                {users.map((element, i) => { return (<li key={element.id}>Name: {element.name} Email: {element.email}</li>) })}
+
+                {/* {users.map((element, i) => { return (<li key={element.id}>Name: {element.name} Email: {element.email}</li>) })} */}
+                
             </ul>
 
             <div>
