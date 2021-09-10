@@ -7,7 +7,7 @@ export default function Events() {
 
     const tame = { eventName: "Tame Impala", date: '09-10-2021', category: 'music', maxAttendees: 500, price: 80, id: "1", description: "words" };
     const bumbershoot = { eventName: "Bumbershoot", date: '09-17-2021', category: 'music', maxAttendees: 800, price: 100, id: "2", description: "words" };
-    const fair = { eventName: "Washington State Fair", date: '09-20-2021', category: 'entertainment', maxAttendees: 400, price: 40, id: "3", description: "words" };
+    const fair = { eventName: "Washington State Fair", date: '09-20-2021', category: 'family', maxAttendees: 400, price: 40, id: "3", description: "words" };
 
     const [events, setEvents] = useState([tame, bumbershoot, fair]);
     const [eventName, setEventName] = useState('');
@@ -54,6 +54,10 @@ export default function Events() {
         e.preventDefault();
         deleteEvent(deleteId)
 
+    }
+
+    const showEvents = (searchedEvents) =>{
+        return searchedEvents
     }
 
     return (
@@ -133,7 +137,7 @@ export default function Events() {
                     <input type="submit" />
                 </form>
             </div>
-            <Search />
+            <Search showSearchedEvents={showEvents}/>
 
         </div>
     )
