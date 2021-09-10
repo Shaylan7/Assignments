@@ -1,11 +1,13 @@
 import express from "express";
 import mime from "mime-types";
 
+import eventRoutes from "./events.mjs";
 import userRoutes from "./users.mjs";
 
 const app = express();
 const port = process.env.PORT || 4000;
 
+app.use("/api/events", eventRoutes);
 app.use("/api/users", userRoutes);
 
 app.get("/api/ping", (request, response) =>
