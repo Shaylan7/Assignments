@@ -15,8 +15,7 @@ eventRoutes.delete("/:eventId", async (request, response) => {
 
 eventRoutes.use(express.json());
 eventRoutes.post("/", async (request, response) => {
-  const event = await db.addEvent(request.body);
-  response.status(201).json(event);
+  response.status(201).json(await db.addEvent(request.body));
 });
 
 export default eventRoutes;

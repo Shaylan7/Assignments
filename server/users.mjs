@@ -15,8 +15,7 @@ userRoutes.delete("/:userId", async (request, response) => {
 
 userRoutes.use(express.json());
 userRoutes.post("/", async (request, response) => {
-  const user = await db.addUser(request.body);
-  response.status(201).json(user);
+  response.status(201).json(await db.addUser(request.body));
 });
 
 export default userRoutes;
