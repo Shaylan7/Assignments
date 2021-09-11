@@ -55,6 +55,15 @@
         "bug",
         "test"
       ]
+    },
+    {
+      "login": "tabbykatz",
+      "name": "Tabitha O'Melay",
+      "avatar_url": "https://avatars.githubusercontent.com/u/55110763?v=4",
+      "profile": "https://www.tabbykatz.com/",
+      "contributions": [
+        "bug"
+      ]
     }
   ],
   "commit": true,
