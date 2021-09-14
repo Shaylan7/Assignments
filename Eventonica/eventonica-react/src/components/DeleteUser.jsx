@@ -5,21 +5,11 @@ export default function DeleteUser(props){
    
     const [deleteId, setdeleteId] = useState('');
     
-    // const handleDeleteButtonClick = e => {
-    //     e.preventDefault();
-    //     props.deleteUser(deleteId)
-    
-    // }
-
-
     const handleDeleteButtonClick = e => {
-        console.log('hello')
-        console.log(deleteId)
-        fetch(`http://localhost:3000/users/${deleteId}`,{method: 'DELETE'})
-                .then(response => response.json())
-                .then(json => console.log(json))
-                window.location.reload(false);
-       }
+        e.preventDefault();
+        props.deleteUser(deleteId)
+    
+    }
 
     return (
     <div>
